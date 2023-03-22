@@ -1,0 +1,139 @@
+from django.db import models
+
+# Create your models here.
+class industryClass(models.Model): #行业分类
+    className=models.CharField(max_length=16,unique=True,null=False)
+class conceptClass(models.Model):#概念分类
+    className=models.CharField(max_length=16,unique=True,null=False)
+class areaClass(models.Model):#概念分类
+    className=models.CharField(max_length=16,unique=True,null=False)
+
+class sectorClass(models.Model):#各种板块
+    className=models.CharField(max_length=16,unique=True)
+
+class stockBasics(models.Model):
+    """
+
+        code,代码
+        name,名称
+        industry,所属行业
+        area,地区
+        pe,市盈率
+        outstanding,流通股本(亿)
+        totals,总股本(亿)
+        totalAssets,总资产(万)
+        liquidAssets,流动资产
+        fixedAssets,固定资产
+        reserved,公积金
+        reservedPerShare,每股公积金
+        esp,每股收益
+        bvps,每股净资
+        pb,市净率
+        timeToMarket,上市日期
+        undp,未分利润
+        perundp, 每股未分配
+        rev,收入同比(%)
+        profit,利润同比(%)
+        gpr,毛利率(%)
+        npr,净利润率(%)
+        holders,股东人数
+    """
+    code = models.CharField(max_length=8,unique=True)
+    name = models.CharField(max_length=64,unique=True)
+    industry = models.ForeignKey('industryClass',to_field='className',on_delete=None)
+    area = models.ForeignKey('areaClass',to_field='className',on_delete=None)
+    concept= models.ForeignKey('conceptClass',to_field='className',on_delete=None)
+    sector= models.ForeignKey('sectorClass',to_field='className',on_delete=None)
+    pe = models.CharField(max_length=64)
+    outstanding = models.CharField(max_length=64)
+    totals = models.CharField(max_length=64)
+    totalAssets = models.CharField(max_length=64)
+    liquidAssets = models.CharField(max_length=64)
+    fixedAssets = models.CharField(max_length=64)
+    reserved = models.CharField(max_length=64)
+    reservedPerShare = models.CharField(max_length=64)
+    esp = models.CharField(max_length=64)
+    bvps = models.CharField(max_length=64)
+    pb = models.CharField(max_length=64)
+    timeToMarket = models.CharField(max_length=64)
+    undp = models.CharField(max_length=64)
+    perundp = models.CharField(max_length=64)
+    rev = models.CharField(max_length=64)
+    profit   = models.CharField(max_length=64)
+    gpr   = models.CharField(max_length=64)
+    npr   = models.CharField(max_length=64)
+    holders   = models.CharField(max_length=64)
+
+class stockReport(models.Model):
+    code=models.OneToOneField(to='stockBasics',to_field='name',on_delete=None)
+    eps=models.CharField(max_length=32)
+    eps_yoy=models.CharField(max_length=32)
+    bvps=models.CharField(max_length=32)
+    roe=models.CharField(max_length=32)
+    epcf=models.CharField(max_length=32)
+    net_profits=models.CharField(max_length=32)
+    profits_yoy=models.CharField(max_length=32)
+    distrib=models.CharField(max_length=64)
+    report_date=models.CharField(max_length=16)
+    season=models.CharField(max_length=16)
+
+    def to_dict(self):
+        self_dict=dict()
+        self_dict['code']=self.code
+        self_dict['eps']=self.eps
+        self_dict['eps_yoy']=self.eps_yoy
+        self_dict['bvps']=self.bvps
+        self_dict['roe']=self.roe
+        self_dict['epcf']=self.epcf
+        self_dict['net_profits']=self.net_profits
+        self_dict['profits_yoy']=self.profits_yoy
+        self_dict['distrib']=self.distrib
+        self_dict['report_date']=self.report_date
+        self_dict['season']=self.season
+        return self_dict
+
+class stockHistData(models.Model):
+    code = models.OneToOneField(to='stockBasics', to_field='code',related_name='stockBasic',on_delete=None)
+    # name = models.OneToOneField(to='stockBasics', to_field='name',related_name='stockBasic',on_delete=None)
+    date=models.DateField()
+    open=models.CharField(max_length=16)
+    high=models.CharField(max_length=16)
+    close=models.CharField(max_length=16)
+
+    low=models.CharField(max_length=16)
+    volume=models.CharField(max_length=16)
+    price_change=models.CharField(max_length=16)
+    p_change=models.CharField(max_length=16)
+    ma5=models.CharField(max_length=16)
+
+    ma10=models.CharField(max_length=16)
+    ma20=models.CharField(max_length=16)
+    v_ma5=models.CharField(max_length=16)
+    v_ma10=models.CharField(max_length=16)
+    v_ma20=models.CharField(max_length=16)
+
+    turnover=models.CharField(max_length=16,default='NULL')
+
+    def to_dict(self):
+        self_dict=dict()
+
+        self_dict['code']=self.code.code
+        self_dict['name']=self.code.name
+        self_dict['date']=self.date
+        self_dict['open']=self.open
+        self_dict['high']=self.high
+        self_dict['close']=self.close
+
+        self_dict['low']=self.low
+        self_dict['volume']=self.volume
+        self_dict['price_change']=self.price_change
+        self_dict['p_change']=self.p_change
+        self_dict['ma5']=self.ma5
+
+        self_dict['ma10']=self.ma10
+        self_dict['ma20']=self.ma20
+        self_dict['v_ma5']=self.v_ma5
+        self_dict['v_ma10']=self.v_ma10
+        self_dict['v_ma20']=self.v_ma20
+
+        self_dict['turnover']=self.turnover

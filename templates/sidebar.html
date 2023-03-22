@@ -1,0 +1,574 @@
+{% load static %}
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>交易信息</span>
+            <a class="d-flex align-items-center text-muted" href="#">
+                {#                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>#}
+            </a>
+        </h6>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link " ng-class="{active:sidebarAct=='jinrongxinwen'}"
+                   ng-click="sidebarAct='jinrongxinwen';core_context_href='/News'" href="#/News?page=1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="feather feather-home">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    金融新闻 <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" ng-class="{active:sidebarAct=='gushidapan'}"
+                   ng-click="sidebarAct='gushidapan';core_context_href='/Stock'" href="#/Stock">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="feather feather-file">
+                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                        <polyline points="13 2 13 9 20 9"></polyline>
+                    </svg>
+                    股市大盘
+                </a>
+            </li>
+            <li class="nav-item">
+                {#                <a class="nav-link"ng-class="{active:sidebarAct=='jinrongjisuan'}"ng-click="sidebarAct='jinrongjisuan';core_context_href='http://calculator.quickloans.cn'" href="#">#}
+                <a class="nav-link" ng-class="{active:sidebarAct=='jinrongjisuan'}"
+                   ng-click="sidebarAct='jinrongjisuan';core_context_href='/Calculate'" href="#/Calculate">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="feather feather-shopping-cart">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    国际汇率
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" ng-class="{active:sidebarAct=='jiaoyicelue'}"
+                   ng-click="sidebarAct='jiaoyicelue';core_context_href='/Strategies'" href="#/Strategies/  ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="feather feather-layers">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                    交易策略
+                </a>
+            </li>
+            {#              <li class="nav-item">#}
+            {#                <a class="nav-link" href="#">#}
+            {#                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>#}
+            {#                  我的订单#}
+            {#                </a>#}
+            {#              </li>#}
+            {#              <li class="nav-item">#}
+            {#                <a class="nav-link" href="#">#}
+            {#                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>#}
+            {#                  理财报告#}
+            {#                </a>#}
+            {#              </li>#}
+
+        </ul>
+
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>账户管理</span>
+            <a class="d-flex align-items-center text-muted" href="#">
+                {#                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>#}
+            </a>
+        </h6>
+        <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+                <a class="nav-link" ng-class="{active:sidebarAct=='gerenxinxi'}"
+                   ng-click="sidebarAct='gerenxinxi';core_context_href='/Registers/ChangePersonalInfo/'"
+                   href="#/Registers/ChangePersonalInfo/">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="feather feather-file-text">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    个人信息
+                </a>
+            </li>
+            {#              <li class="nav-item">#}
+            {#                <a class="nav-link" href="#">#}
+            {#                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>#}
+            {#                  我的好友#}
+            {#                </a>#}
+            {#              </li>#}
+            <li class="nav-item">
+                <a class="nav-link" ng-class="{active:sidebarAct=='xiugaimima'}"
+                   ng-click="sidebarAct='xiugaimima';core_context_href='/Registers/ChangePassword/'"
+                   href="#/Registers/ChangePassword/">
+                    {#                <a class="nav-link"ng-class="{active:sidebarAct=='xiugaimima'}"ng-click="sidebarAct='xiugaimima';core_context_href='/Registers/ChangePassword/'" href="#">#}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="feather feather-file-text">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    修改密码
+                </a>
+            </li>
+            {#              <li class="nav-item">#}
+            {#                <a class="nav-link" href="#">#}
+            {#                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>#}
+            {#                  Year-end sale#}
+            {#                </a>#}
+            {#              </li>#}
+        </ul>
+    </div>
+</nav>
+<script src="{% static "jquery.min.js" %}"></script>
+<script src="{% static "echarts.min.js" %}"></script>
+{#<script src="http://echarts.baidu.com/dist/echarts.min.js"></script>#}
+<script>
+    var app = angular.module('app', ['ngRoute']);
+    app.config(['$routeProvider', function ($routeProvider) {
+        $routeProvider
+            .when('/News', {templateUrl: '/News/'})
+            .when('/Stock', {templateUrl: '/Stock'})
+            .when('/Calculate', {templateUrl: '/Calculate'})
+            .when('/Strategies', {templateUrl: '/Strategies'})
+
+            .when('/Registers/ChangePersonalInfo/', {templateUrl: '/Registers/ChangePersonalInfo/'})
+            .when('/Registers/ChangePassword/', {templateUrl: '/Registers/ChangePassword/'})
+            .otherwise({redirectTo: '/Stock'});
+    }]);
+    app.controller('myCtrl', function ($scope, $http) {
+        $scope.sidebarAct = 'gushidapan';
+        $scope.core_context_href = '/Stock';
+        $scope.newsPageIndex = 1;
+        $scope.stockPageIndex = 1;
+        $scope.stockReportList;
+        $scope.getLastNews = function getLastNews(i) {
+            {#alert("123456");#}
+            if (i == -1) {
+                $scope.newsPageIndex = document.getElementById("newsPageIndex").value;
+            }
+
+            else {
+                $scope.newsPageIndex = i;
+            }
+            $http({
+                url: '/News/getLastNews',
+                method: 'get',
+                params: {page: $scope.newsPageIndex}
+            }).success(function (response) {
+
+                $scope.lastNewsList = response;
+                {#console.log(data)#}
+
+            })
+
+        }
+        $scope.getStockReport = function getStockReport(i) {
+            {#alert("123456");#}
+            if (i == -1) {
+                $scope.stockPageIndex = document.getElementById("stockPageIndex").value;
+            }
+
+            else {
+                $scope.stockPageIndex = i;
+            }
+            $http({
+                url: '/Stock/getStockReport',
+                method: 'get',
+                params: {page: $scope.stockPageIndex}
+            }).success(function (response) {
+
+                $scope.stockReportList = response;
+                console.log($scope.stockReportList)
+                {#console.log(data)#}
+
+            })
+
+        }
+        $scope.id = "eChart_Stock";
+        $scope.stockName = "";
+        $scope.legend = [$scope.stockName];
+        $scope.item = [];
+        $scope.data = [ // 开盘，收盘，最低，最高
+
+        ];
+        $scope.dataFormat = {
+            {#value: [2320.26, 2302.6, 2287.3, 2362.94],#}
+            itemStyle: {
+                normal: {
+                    color0: 'blue',         // 阴线填充颜色
+                    lineStyle: {
+                        width: 3,
+                        color0: 'blue'      // 阴线边框颜色
+                    }
+                },
+                emphasis: {
+                    color0: 'blue'          // 阴线填充颜色
+                }
+            }
+        }
+        $scope.stockOption = {
+            // 提示框，鼠标悬浮交互时的信息提示
+            tooltip: {
+                trigger: 'axis',
+                formatter: function (params) {
+                    var res = params[0].seriesName + ' ' + params[0].name;
+                    res += '<br/>  开盘 : ' + params[0].value[0] + '  最高 : ' + params[0].value[3];
+                    res += '<br/>  收盘 : ' + params[0].value[1] + '  最低 : ' + params[0].value[2];
+                    return res;
+                }
+            },
+            // 图例
+            legend: {
+                data: $scope.legend
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: {show: true},
+                    dataZoom: {show: true},
+                    dataView: {show: true, readOnly: false},
+                    restore: {show: true},
+                    saveAsImage: {show: true}
+                }
+            },
+            dataZoom: {
+                show: true,
+                realtime: true,
+                start: 0,
+                end: 50
+            },
+            // 横轴坐标轴
+            xAxis: [{
+                type: 'category',
+                boundaryGap: true,
+                axisTick: {onGap: false},
+                splitLine: {show: false},
+                data: $scope.item
+            }],
+            // 纵轴坐标轴
+            yAxis: [
+                {
+                    type: 'value',
+                    scale: true,
+                    boundaryGap: [0.01, 0.01]
+                }
+            ],
+            // 数据内容数组
+            series: [
+                {
+                    name: $scope.stockName,
+                    type: 'k',
+                    barMaxWidth: 20,
+                    itemStyle: {
+                        normal: {
+                            color: 'red',           // 阳线填充颜色
+                            color0: 'lightgreen',   // 阴线填充颜色
+                            lineStyle: {
+                                width: 2,
+                                color: 'orange',    // 阳线边框颜色
+                                color0: 'green'     // 阴线边框颜色
+                            }
+                        },
+                        emphasis: {
+                            color: 'black',         // 阳线填充颜色
+                            color0: 'white'         // 阴线填充颜色
+                        }
+                    },
+                    data: $scope.data,
+                    markPoint: {
+                        symbol: 'star',
+                        //symbolSize:20,
+                        itemStyle: {
+                            normal: {label: {position: 'top'}}
+                        },
+                        data: [
+                            {name: '最高', value: 2444.8, xAxis: '2013/2/18', yAxis: 2466}
+                        ]
+                    }
+                }
+            ]
+        };
+        {#$scope.myChart = echarts.init(document.getElementById($scope.id), 'macarons');#}
+        $scope.echartInit = function () {
+            $scope.stockName = "上证指数";
+            date_tmp = [
+                "2013/1/24", "2013/1/25", "2013/1/28", "2013/1/29", "2013/1/30",
+                "2013/1/31", "2013/2/1", "2013/2/4", "2013/2/5", "2013/2/6",
+                "2013/2/7", "2013/2/8", "2013/2/18", "2013/2/19", "2013/2/20",
+                "2013/2/21", "2013/2/22", "2013/2/25", "2013/2/26", "2013/2/27",
+                "2013/2/28", "2013/3/1", "2013/3/4", "2013/3/5", "2013/3/6",
+                "2013/3/7", "2013/3/8", "2013/3/11", "2013/3/12", "2013/3/13",
+                "2013/3/14", "2013/3/15", "2013/3/18", "2013/3/19", "2013/3/20",
+                "2013/3/21", "2013/3/22", "2013/3/25", "2013/3/26", "2013/3/27",
+                "2013/3/28", "2013/3/29", "2013/4/1", "2013/4/2", "2013/4/3",
+                "2013/4/8", "2013/4/9", "2013/4/10", "2013/4/11", "2013/4/12",
+                "2013/4/15", "2013/4/16", "2013/4/17", "2013/4/18", "2013/4/19",
+                "2013/4/22", "2013/4/23", "2013/4/24", "2013/4/25", "2013/4/26",
+                "2013/5/2", "2013/5/3", "2013/5/6", "2013/5/7", "2013/5/8",
+                "2013/5/9", "2013/5/10", "2013/5/13", "2013/5/14", "2013/5/15",
+                "2013/5/16", "2013/5/17", "2013/5/20", "2013/5/21", "2013/5/22",
+                "2013/5/23", "2013/5/24", "2013/5/27", "2013/5/28", "2013/5/29",
+                "2013/5/30", "2013/5/31", "2013/6/3", "2013/6/4", "2013/6/5",
+                "2013/6/6", "2013/6/7", "2013/6/13"
+            ];
+            point_tmp = [
+                [2300, 2291.3, 2288.26, 2308.38],
+                [2295.35, 2346.5, 2295.35, 2346.92],
+                [2347.22, 2358.98, 2337.35, 2363.8],
+                [2360.75, 2382.48, 2347.89, 2383.76],
+                [2383.43, 2385.42, 2371.23, 2391.82], [2377.41, 2419.02, 2369.57, 2421.15],
+                [2425.92, 2428.15, 2417.58, 2440.38],
+                [2411, 2433.13, 2403.3, 2437.42],
+                [2432.68, 2434.48, 2427.7, 2441.73],
+                [2430.69, 2418.53, 2394.22, 2433.89],
+                [2416.62, 2432.4, 2414.4, 2443.03],
+                [2441.91, 2421.56, 2415.43, 2444.8],
+                [2420.26, 2382.91, 2373.53, 2427.07],
+                [2383.49, 2397.18, 2370.61, 2397.94],
+                [2378.82, 2325.95, 2309.17, 2378.82],
+                [2322.94, 2314.16, 2308.76, 2330.88],
+                [2320.62, 2325.82, 2315.01, 2338.78],
+                [2313.74, 2293.34, 2289.89, 2340.71],
+                [2297.77, 2313.22, 2292.03, 2324.63],
+                [2322.32, 2365.59, 2308.92, 2366.16],
+                [2364.54, 2359.51, 2330.86, 2369.65],
+                [2332.08, 2273.4, 2259.25, 2333.54],
+                [2274.81, 2326.31, 2270.1, 2328.14],
+                [2333.61, 2347.18, 2321.6, 2351.44],
+                [2340.44, 2324.29, 2304.27, 2352.02],
+                [2326.42, 2318.61, 2314.59, 2333.67],
+                [2314.68, 2310.59, 2296.58, 2320.96],
+                [2309.16, 2286.6, 2264.83, 2333.29],
+                [2282.17, 2263.97, 2253.25, 2286.33],
+                [2255.77, 2270.28, 2253.31, 2276.22],
+                [2269.31, 2278.4, 2250, 2312.08],
+                [2267.29, 2240.02, 2239.21, 2276.05],
+                [2244.26, 2257.43, 2232.02, 2261.31],
+            ];
+            for (var i = 0; i < point_tmp.length; i++) {
+                $scope.data.push(point_tmp[i])
+            }
+            for (var i = 0; i < date_tmp.length; i++) {
+                $scope.item.push(date_tmp[i])
+            }
+            var myChart = echarts.init(document.getElementById($scope.id), 'macarons');
+            myChart.setOption($scope.stockOption);
+        }
+        $scope.json2List = function (data) {
+
+            tmp = []
+            for (k in data) {
+                tmp.push(data[k])
+            }
+            return tmp.reverse()
+        }
+
+        $scope.drawEchart = function (data, method) {
+            $scope.stockCode = data['code'];
+            $scope.stockName = data['name'];
+            {#console.log(typeof($scope.stockName));#}
+            {#console.log(typeof($scope.stockName));#}
+
+            v_date_tmp = $scope.json2List(data['date'])
+            v_open = $scope.json2List(data['open']);
+            v_close = $scope.json2List(data['close']);
+            v_low = $scope.json2List(data['low']);
+            v_high = $scope.json2List(data['high']);
+
+            v_date = []
+            for (var i = 0; i < v_date_tmp.length; i++) {
+                if ((i % 7) == 0) {
+                    v_date.push(v_date_tmp[i].split('-').join('/'))
+                }
+            }
+            v_data = []
+            for (var i = 0; i < v_date.length; i++) {
+                tmp = [v_open[i], v_close[i], v_low[i], v_high[i]]
+                v_data.push(tmp)
+            }
+
+
+            if (method == 'change') {
+                $scope.data = [$scope.dataFormat]
+                $scope.item = v_date;
+                console.log($scope.item)
+            }
+            else if (method == 'push') {
+                {#$scope.data=$scope.data.concat(data['date'])#}
+                $scope.item = $scope.date.concat(v_date)
+            }
+            $scope.data = $scope.data.concat(v_data);
+            $scope.stockOption.legend.data = $scope.stockName;
+            $scope.stockOption.series[0].name = $scope.stockName;
+            $scope.stockOption.series[0].data = $scope.data;
+            $scope.stockOption.xAxis[0].data = v_date;
+            console.log($scope.stockOption);
+
+            var myChart = echarts.init(document.getElementById($scope.id), 'macarons');
+            myChart.setOption($scope.stockOption);
+
+        }
+        $scope.getStockHists = function (stockCode) {
+            url = "/Stock/getStockHists?stockCode=" + stockCode;
+            $http({url: url, method: 'get'}).success(
+                function (response) {
+                    {#console.log(response);#}
+                    $scope.drawEchart(response, 'change');
+                }
+            )
+        }
+
+        $scope.strategyEntity = {
+            uid: '',
+            userid: '',
+            strategyName: '',
+            strategyScript: '',
+            createTime: '',
+            lastEditTime: '',
+            status: ''
+        }
+        $scope.strategyScriptRunResult = "";
+        $scope.strategyScriptRunAlertContent = "测试";
+        $scope.editEntityAlertShow=false
+        $scope.StartAlert=function (msg) {
+            $scope.strategyScriptRunAlertContent=msg;
+            $scope.editEntityAlertShow= true;
+
+            console.log($scope.editEntityAlertShow)
+
+        }
+        $scope.strategyRun = function () {
+
+            {#console.log(data)#}
+            $http({
+                url: '/Strategies/runSript',
+                method: 'get',
+                params: {strategyScript: $scope.strategyEntity.strategyScript}
+            }).success(function (response) {
+
+                $scope.strategyScriptRunResult = response;
+                console.log($scope.stockReportList)
+                {#console.log(data)#}
+
+            })
+        }
+
+        $scope.strategyList = [];
+        $scope.getStrategyList = function (entityFlush) {
+            $http(
+                {
+                    url: '/Strategies/getScriptList',
+                    method: 'get'
+                }
+            ).success(
+                function (data) {
+                    $scope.strategyList = data;
+                    console.log($scope.strategyList)
+                    if(entityFlush ==  'True'){
+                        $scope.strategyEntity=$scope.strategyList[0]
+                    }
+
+                }
+            )
+        }
+        $scope.createStrategy = function () {
+            $http(
+                {
+                    url: '/Strategies/createScript',
+                    method: 'get'
+                }
+            ).success(
+                function (response) {
+                    $scope.strategyEntity = response
+                    tmp = [response]
+                    tmp = tmp.concat($scope.strategyList)
+                    $scope.strategyList = tmp;
+                    console.log(response)
+                }
+            )
+
+        }
+
+        $scope.saveStrategy = function () {
+            $http(
+                {
+                    url: '/Strategies/saveStrategy  ',
+                    method: 'get',
+                    params: $scope.strategyEntity
+                }).success(
+                function (response) {
+                    $scope.strategyScriptRunAlertContent = response;
+                    $scope.getStrategyList('False')
+                }
+            )
+
+        }
+        $scope.editThisStrategy = function (elem) {
+            {#console.log(elem)#}
+            strategyID = elem.strategy.id;
+            {#console.log(strategyID)#}
+            $scope.getStrategyByID(strategyID)
+        }
+        $scope.getStrategyByID = function (id) {
+            {#console.log(elem)#}
+            {#console.log(strategyID)#}
+            console.log(id)
+            $http({
+                url: '/Strategies/getScript',
+                method: 'get',
+                params: {'id': id}
+            }).success(function (response) {
+                $scope.strategyEntity = response;
+                console.log("have get the script",id)
+            })
+        }
+        $scope.downloadScript = function () {
+
+            console.log("下载成功！ ")
+        }
+        $scope.exchangeRate = []
+        $scope.get_exchange_rate = function () {
+            console.log("get exchange rate")
+            $http({
+                url: '/Calculate/get_exchange_rate',
+                method: 'get'
+            }).success(function (response) {
+                $scope.exchangeRate = response;
+                console.log(typeof (response), response)
+            })
+        }
+        $scope.deleteStrategy=function (elem) {
+            console.log(elem)
+            id=elem.id
+            $scope.deleteStrategyByID(id)
+
+        }
+        $scope.deleteStrategyByID = function (id) {
+            {#console.log(elem)#}
+            {#console.log(strategyID)#}
+            console.log(id)
+            $http({
+                url: '/Strategies/deleteScript',
+                method: 'get',
+                params: {'id': id}
+            }).success(function (response) {
+                $scope.strategyEntity = response;
+                $scope.StartAlert("删除成功！")
+                console.log("have delete the script")
+                $scope.getStrategyList("True")
+            })
+        }
+
+    });
+
+</script>

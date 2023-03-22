@@ -1,0 +1,301 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NB的量化交易系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static "bootstrap.min.css" %}" type="text/css"/>
+    <script src="{% static "angular.js" %}"></script>
+
+</head>
+<body ng-app="app" ng-controller="myCtrl">
+{#<div ng-show="alert=true" class="alert fade in " role="alert"></div>#}
+<div class="container-fluid">
+
+    <div class="row" style="margin-top: 16% ">
+        <div class="row col-md-6 col-md-offset-1">
+            <div class="row" style="">
+                <h1 class="text-center">NB的量化交易系统</h1>
+            </div>
+            <div class="row text-center" style="margin-top: 5%">
+                <h5><span>首都师范大学</span>&nbsp;<span>信息工程学院</span>&nbsp;<span>计算机科学与技术</span></h5>
+                <h5><span>1151003123</span>&nbsp;<span>杨自修</span>&nbsp&nbsp&nbsp&nbsp<span>1151002054</span>&nbsp;<span>柴霄宇</span></h5>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-4 " style="border-left-style: solid ">
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a href="#" ng-init="tagTitleName='登录'"
+                                                          ng-bind="tagTitleName"></a></li>
+                <button type="button" style="margin-left: 2%" ng-init="tagBtnName='注册'" ng-bind="tagBtnName"
+                        ng-click="changetag()" class="btn btn-default"></button>
+
+            </ul>
+            {% csrf_token %}
+            <div ng-init="tag='login'" ng-switch="tag">
+
+                <div ng-switch-when="login">
+                    <form class="form-horizontal" style="margin-top: 10%" method="POST" ng-submit="login()">
+
+                        <div class="form-group">
+
+                            <label for="inputUser3" class="col-sm-2 control-label col-sm-offset-1 ">用户名</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="user" ng-model="user" id="inputUser3"
+                                       placeholder="用户名" required
+                                       oninvalid="setCustomValidity('用户名不能为空！');"/>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label col-sm-offset-1">密 码</label>
+                            <div class="col-sm-7">
+                                <input type="password" class="form-control" name="pwd" ng-model="pwd"
+                                       id="inputPassword3" placeholder="密  码"
+                                       required
+                                       oninvalid="setCustomValidity('请填写密码！');"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <div class="alert alert-danger" ng-show="alert==true&&alert_danger==true" role="alert"
+                                     ng-bind="alertMessage"></div>
+                                <div class="alert alert-success" ng-show="alert==true&&alert_success==true" role="alert"
+                                     ng-bind="alertMessage"></div>
+                                <div class="alert alert-warning" ng-show="alert==true&&alert_warning==true" role="alert"
+                                     ng-bind="alertMessage"></div>
+                            </div>
+                            <div class="col-sm-offset-2">
+                                <button type="submit" class="btn btn-default">登录</button>
+                                <button type="button" class="btn btn-default" ng-click="haventadd()">忘记密码</button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div ng-switch-when="signup">
+                    <form class="form-horizontal" style="margin-top: 10%" ng-submit="signup()">
+
+                        <div class="form-group">
+                            <label for="inputUser3" class="col-sm-2 control-label col-sm-offset-1 ">用户名</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="inputUser3" placeholder="用户名" required
+                                       oninvalid="setCustomValidity('用户名不能为空！');"/>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="nickname" class="col-sm-2 control-label col-sm-offset-1 ">昵 称</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="nickname" ng-model="nickname"
+                                       id="nickname"
+                                       placeholder="昵  称"/>
+                            </div>
+                            {#                            <span ng-bind="user"></span>#}
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label col-sm-offset-1">密 码</label>
+                            <div class="col-sm-7">
+                                <input type="password" class="form-control" id="inputPassword3" placeholder="密  码"
+                                       required
+                                       oninvalid="setCustomValidity('请填写密码！');"/>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="email" class="col-sm-2 control-label col-sm-offset-1 ">邮 箱</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="email" ng-model="email" id="email"
+                                       placeholder="邮  箱"/>
+                            </div>
+                            {#                            <span ng-bind="user"></span>#}
+                        </div>
+                        <div class="form-group">
+
+                            <label for="phone" class="col-sm-2 control-label col-sm-offset-1 ">手 机</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="phone" ng-model="phone" id="phone"
+                                       placeholder="手  机"/>
+                            </div>
+                            {#                            <span ng-bind="user"></span>#}
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <div class="alert alert-danger" ng-show="alert==true&&alert_danger==true" role="alert"
+                                     ng-bind="alertMessage"></div>
+                                <div class="alert alert-success" ng-show="alert==true&&alert_success==true" role="alert"
+                                     ng-bind="alertMessage"></div>
+                                <div class="alert alert-warning" ng-show="alert==true&&alert_warning==true" role="alert"
+                                     ng-bind="alertMessage"></div>
+                            </div>
+                            <div class="col-sm-offset-2">
+                                <button type="submit" class="btn btn-default">注册</button>
+
+                                <input type="reset" class="btn btn-default" value="重新填写">
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+{#<script src="{% static "echarts.js" %}"></script>#}
+</body>
+
+<script src="{% static "jquery.min.js" %}"></script>
+{#<script src="{% static "bootstrap.min.js" %}"></script>#}
+
+{#<script src="{% static "echarts.js" %}"></script>#}
+<script>
+    {#$("#inputUser3").focus();#}
+    var app = angular.module('app', []);
+    app.config(function ($httpProvider) {
+        $httpProvider.defaults.headers.post = {'Content-Type': 'application/x-www-form-urlencoded'}
+    })
+    app.controller('myCtrl', function ($scope,$timeout) {
+
+        $scope.alert = false;
+        $scope.alert_danger = false;
+        $scope.alert_success = false;
+        $scope.alert_warning = false;
+        $scope.alertMessage = "";
+
+        $scope.closeAlert=function () {
+                $scope.alert = false;
+                $scope.alert_danger = false;
+                $scope.alert_success = false;
+                $scope.alert_warning = false;
+            }
+        $scope.haventadd = function () {
+            $scope.closeAlert();
+            $scope.alert = true;
+            $scope.alert_warning = true;
+            $scope.alertMessage = "尚未添加此功能！";
+        }
+        $scope.changetag = function () {
+             $scope.closeAlert();
+            {#console.log($scope.tag);#}
+            if ($scope.tag == 'login') {
+                $scope.tag = 'signup';
+                $scope.tagTitleName = '注册';
+                $scope.tagBtnName = '登录';
+            } else {
+                $scope.tag = 'login';
+                $scope.tagTitleName = "登录";
+                $scope.tagBtnName = "注册";
+            }
+            $scope.$apply();
+        }
+        $scope.signup = function () {
+            $scope.closeAlert();
+            var csrf = jQuery("input[name='csrfmiddlewaretoken']").val();
+            var user = jQuery("#inputUser3").val();
+            var pwd = jQuery("#inputPassword3").val();
+            var nickname = jQuery("#nickname").val();
+            var email = jQuery("#email").val();
+            var phone = jQuery("#phone").val();
+            sendData = {
+                username: user,
+                password: pwd,
+                nickname: nickname,
+                email: email,
+                phone: phone,
+                csrfmiddlewaretoken: csrf
+            }
+            jQuery.ajax(
+                {
+                    url: '/Registers/Signup',
+                    method: 'POST',
+                    data: sendData,
+                    success: function (data) {
+
+                        data = JSON.parse(data)
+                        console.log(data['status'])
+                        if (data['status'] == 200) {
+                            console.log("注册成功！--1");
+                            $scope.alert = true;
+                            $scope.alert_success = true;
+                            $timeout($scope.changetag(),500);
+                            $scope.alert = true;
+                            $scope.alert_success = true;
+                            $scope.alertMessage="注册成功！请登陆！";
+                            $scope.$apply();
+                        } else {
+                            console.log("注册成功！--2");
+                            $scope.alert = true;
+                            $scope.alert_danger = true;
+                            $scope.alertMessage = data["msg"];
+                            console.log(data['msg'])
+                            console.log(data)
+
+
+                        }
+                        $scope.$apply();
+                    }
+                }
+            )
+        }
+        $scope.login = function () {
+            $scope.closeAlert();
+            var csrf = jQuery("input[name='csrfmiddlewaretoken']").val();
+            var user = jQuery("#inputUser3").val();
+            var pwd = jQuery("#inputPassword3").val();
+
+
+            sendData = {
+                user: user,
+                pwd: pwd,
+
+
+                csrfmiddlewaretoken: csrf
+            }
+            jQuery.ajax(
+                {
+                    url: '/Registers/Login',
+                    method: 'POST',
+                    data: sendData,
+                    success: function (data) {
+                        data = JSON.parse(data)
+                        if (data['status'] == 200) {
+
+                            $scope.alertMessage ="登录成功！跳转ing...";
+                            $scope.alert = true;
+                            $scope.alert_success = true;
+                            $scope.$apply();
+
+
+                            $timeout(location.href = data['url'],100000);
+                            console.log(data['url']);
+                            {#$timeout(alert("11"),500);#}
+                        } else {
+                            $scope.alert = true;
+                            $scope.alert_danger = true;
+                            $scope.alertMessage = data["msg"];
+                            console.log(data)
+
+                        }
+                        $scope.$apply();
+                    }
+                }
+            )
+
+        }
+
+    })
+
+
+</script>
+
+</html>

@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>组件</title>
+    <!--引入bootstrap样式文件-->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!--引入jq（必须在bootstrap.min.js文件之前）-->
+<script src="{% static "jquery.min.js" %}"></script>
+<script src="{% static "bootstrap.min.js" %}"></script>
+    <script>
+            $(function(){
+            $('#alert').on('close.bs.alert', function () {
+                alert("即将关闭")
+            });
+            $('#alert').on('closed.bs.alert', function () {
+                alert("哦豁，已经关闭了")
+            })
+        })
+    </script>
+</head>
+<body style="margin: 150px">
+    <div id="alert" class="alert alert-danger alert-dismissable fade in">
+        <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4>危险</h4>
+        <p>哥哥，你的打开方式不对，请重新打开,谢谢！</p>
+        <p>
+            <button type="button" class="btn btn-danger">不干</button>
+            <button type="button" class="btn btn-default">好哒</button>
+        </p>
+    </div>
+<!--不加 fade in的效果-->
+    <div class="alert alert-warning alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4>警告</h4>
+        <p>警告，博主长得太帅，千万别和他比帅！</p>
+        <p>
+            <button type="button" class="btn btn-danger">我不信</button>
+            <button type="button" class="btn btn-default">不信也得信</button>
+        </p>
+    </div>
+</body>
+</html>

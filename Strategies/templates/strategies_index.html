@@ -1,0 +1,109 @@
+<div class="row">
+    <div class="col-2">
+        <div ng-init="getStrategyList('True')">
+            <div href="#" class="list-group-item list-group-item-action">交易策略</div>
+            <div class="list-group">
+                <div ng-repeat="strategy in strategyList">
+                    <div class="list-group-item list-group-item-action list-group-item-primary align-items-lg-center" role="strategyList">
+                        <span class="text-left"ng-bind="strategy.strategyName" ng-click="editThisStrategy(this)">
+
+                    </span>
+                        <span class="close text-danger" data-dismiss="alert" aria-label="Close" aria-hidden="true"ng-click="deleteStrategyByID(strategy.id)">&times;</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {#【；#}
+    </div>
+    <div class="col-9">
+        <div class="row justify-content-end">
+            {#            <div class="justify-content-lg-start">#}
+            {#                <button type="button" class="btn btn-success">策略列表</button>#}
+            {#            </div>#}
+
+            <div class="btn-toolbar " role="toolbar" aria-label="Toolbar with button groups">
+
+                <div>
+                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                        <button type="button" class="btn btn-primary" ng-click="createStrategy()">新建</button>
+                        {#                        <button type="button" class="btn btn-secondary">上传</button>#}
+                        <button type="button" class="btn btn-info" ng-click="saveStrategy()">保存</button>
+                        <button type="button" class="btn btn-primary" ng-click="deleteStrategy(strategyEntity);editEntityAlertShow= true;">删除
+                        </button>
+                    </div>
+                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+                        {#                        <button type="button" class="btn btn-success">测试</button>#}
+                        <button type="button" class="btn btn-warning" ng-click="strategyRun()">运行</button>
+                        {#                        <button type="button" class="btn btn-danger disabled">暂停</button>#}
+                    </div>
+                    {#                    <div class="btn-group" role="group" aria-label="Third group">#}
+                    {#                        <button type="button" class="btn btn-primary">托管</button>#}
+                    {#                    </div>#}
+                </div>
+            </div>
+
+        </div>
+        <div  ng-show="editEntityAlertShow">
+            {#            <div>--------</div>#}
+            <div class="alert alert-dark alert-dismissible fade show m-2" role="alert">
+                <strong>提示</strong> <span ng-bind="strategyScriptRunAlertContent">You should check in on some of those fields below.</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                        ng-click="editEntityAlertShow=false">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+{#        <input type="checkbox"ng-model="editEntityAlertShow">#}
+{#        <div ng-bind="editEntityAlertShow"></div>#}
+        <hr/>
+        <form>
+            <div class="row">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">策略名：</span>
+                    </div>
+                    <input type="text" class="form-control" ng-model="strategyEntity.strategyName"
+                           placeholder="strategyName" aria-label="Username"
+                           aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group">
+                    <textarea id="strategyScript" ng-model="strategyEntity.strategyScript" class="form-control "
+                              rows="13" aria-label="With textarea" ng-model="$parent.strategyScript"></textarea>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">执行结果</span>
+                </div>
+                <textarea class="form-control" rows="3" aria-label="With textarea" ng-model="strategyScriptRunResult">
+{#                    <span><span>年化收益率</span><span>35.8%</span></span>#}
+{#                    <br>#}
+{#                    <span><span>基准年化收益率</span><span>22.4%</span></span>#}
+{#                    <br>#}
+{#                    <span><span>阿尔法</span><span>11.6%</span></span>#}
+{#                    <br>#}
+{#                    <span><span>贝塔</span><span>1.10</span></span>#}
+{#                    <br>#}
+{#                    <span><span>夏普比率</span><span>2.65</span></span>#}
+{#                    <br>#}
+{#                    <span><span>收益波动率</span><span>12.2%</span></span>#}
+{#                    <br>#}
+{#                    <span><span>信息比率</span><span>2.05</span></span>#}
+{#                    <br>#}
+{#                    <span><span>最大回撤</span><span>7.3%</span></span>#}
+{#                    <br>#}
+{#                    <span><span>年化换手率</span><span>148.94%</span></span>#}
+                </textarea>
+            </div>
+        </div>
+        <div class="row">
+            <body>
+            <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+            <div id="main" style="width: 600px;height:400px;"></div>
+            </body>
+        </div>
+    </div>
+</div>

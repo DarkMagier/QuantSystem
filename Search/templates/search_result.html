@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>信息检索</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    {#    <link rel="icon" href="../../../../favicon.ico">#}
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "bootstrap.css" %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    {#    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">#}
+    <link href="{% static "blog.css" %}" rel="stylesheet">
+    <script src="http://apps.bdimg.com/libs/angular.js/1.5.0-beta.0/angular.js"></script>
+</head>
+<body ng-app="app" ng-controller="lineCtrl">
+<header class="blog-header py-3">
+    <div id="highlightWords" style="display:none">{{ highlight_wds }}</div>
+    <form id="search_form" class="form_margin" method="get" action="/Search/search">
+        <div class="input-group">
+            <label id="title" for="input_search_text" class="mouse control-label"
+                   style="vertical-align: middle;margin-top: 1%"><h5>信息检索：</h5></label>&nbsp;
+            <!--<input id="input_search_text"type="text"class="form-control input_style"value={% block search_wd %}{% endblock %} name="wd">-->
+            <input id="input_search_text" type="text" class="form-control input_style" value="{{ search_wd }}"
+                   name="wd">
+            <input id="input_search_ownpage" type="text" style="display: none" class="form-control input_style"
+                   value="1" name="ownpage">
+            <!--<input id="current_page_index"type="text"style="display: none" value={{ current_page_index}} name="current_page_index">-->
+            <input id="input_submit_text" type="submit" class="btn btn-primary" value="搜索一下">
+        </div>
+
+    </form>
+    <div style="background-color: #f8f8f8;margin-top: 1%;margin-bottom: 1%">搜索结果</div>
+</header>
+<div class="blog-post" ng-repeat="news in {{ lastNewsList }}">
+    {% verbatim %}
+    <h5 class="blog-post-title">
+        <a ng-init="news.url='/News/'+news.id+'.html'" target="view_window" ng-href="{{ news.url }}">
+            <span ng-bind="'['+news.classify+']'" style="color:orange"></span>
+            <span ng-bind-html="news.title|highlight"></span>
+        </a>
+    </h5>
+    <p class="blog-post-meta" ng-bind="news.time">
+
+
+    <p ng-bind-html="news.content|highlight"></p>
+
+    <p><a ng-href="{{ news.url}}" target="view_window">阅读全文</a></p>
+    {% endverbatim %}
+    {#                {% endautoescape %}#}
+</div>
+</body>
+<script>
+
+    var app = angular.module('app', []);
+    app.controller('lineCtrl', function ($scope) {
+    })
+    app.filter('highlight', ['$sce',function($sce) { //可以注入依赖
+
+    return function(text) {
+        querywords=document.getElementById("highlightWords").innerText;
+        querywords=querywords.split(",")
+        for(wd in querywords){
+            {#console.log(querywords[wd])#}
+            wdtmp='<span style="color:red">'+querywords[wd]+'</span >';
+            text=text.replace(querywords[wd],wdtmp)
+        }
+        {#return querywords;#}
+        return $sce.trustAsHtml(text);
+    }
+}]);
+</script>
+</html>

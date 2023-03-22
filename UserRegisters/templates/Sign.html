@@ -1,0 +1,95 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+      <script src="{% static "angular.js" %}"></script>
+
+    <title>登录|NB的量化交易系统</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "signin.css" %}" rel="stylesheet">
+  </head>
+
+  <body class="text-center"ng-app="app" ng-controller="myCtrl">
+
+
+
+    <form class="form-signin"  method="post"ng-submit="login()">
+      <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">欢迎登录</h1>
+        <div class="alert alert-danger" ng-init="alert=false" ng-show="alert==true" role="alert"
+                                     ng-bind="alertMessage"></div>
+        {% csrf_token %}
+      <label for="inputEmail" class="sr-only">用户名：</label>
+      <input type="text" id="inputUsername" name="user"class="form-control" placeholder="用户名" required autofocus>
+      <label for="inputPassword" class="sr-only">密码：</label>
+      <input type="password" id="inputPassword"name="pwd" class="form-control" placeholder="密码" required>
+      <div class="checkbox mb-3">
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+        <a href="/Registers/Signup">注册</a>
+        <br/>
+      <p class="mt-5 mb-3 text-muted">NB的量化交易系统 &copy; 2017-2018</p>
+    </form>
+
+    <script src="{% static "jquery.min.js" %}"></script>
+  <script>
+      var app = angular.module('app', []);
+    app.config(function ($httpProvider) {
+        $httpProvider.defaults.headers.post = {'Content-Type': 'application/x-www-form-urlencoded'}
+    })
+      app.controller('myCtrl', function ($scope,$timeout) {
+        $scope.alert = false;
+        $scope.login = function () {
+            $scope.alert = false;
+            $scope.alertMessage="正在登陆";
+            var csrf = jQuery("input[name='csrfmiddlewaretoken']").val();
+            var user = jQuery("#inputUsername").val();
+            var pwd = jQuery("#inputPassword").val();
+
+
+            sendData = {
+                user: user,
+                pwd: pwd,
+
+
+                csrfmiddlewaretoken: csrf
+            }
+            jQuery.ajax(
+                {
+                    url: '/Registers/Login',
+                    method: 'POST',
+                    data: sendData,
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        console.log(data);
+                        if (data['status'] == 200) {
+                            location.href = data['url'];
+                            console.log(data['url']);
+                            {#$timeout(alert("11"),500);#}
+                        } else {
+                            $scope.alert = true;
+                            $scope.alertMessage = data["msg"];
+                            console.log(data)
+
+                        }
+                        $scope.$apply();
+                    }
+                }
+            )
+
+        }
+
+      })
+  </script>
+  </body>
+</html>

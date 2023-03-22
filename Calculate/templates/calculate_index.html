@@ -1,0 +1,50 @@
+
+
+  <body>
+
+    <div class="container-fluid" ng-init="get_exchange_rate()">
+{#        <div ng-init="getStrategyByID(strategyList[0])"></div>#}
+
+
+
+
+          <h2 >国际汇率</h2>
+          <div class="table-responsive">
+            <table class="table table-striped table-sm text-center">
+              <thead>
+                <tr>
+                  <th>bank</th>
+                  <th>currency</th>
+                  <th>code</th>
+                  <th>currencyUnit</th>
+                  <th>cenPrice</th>
+                  <th>buyPrice1</th>
+                  <th>sellPrice1</th>
+                  <th>buyPrice2</th>
+                  <th>sellPrice2</th>
+                  <th>releasedate</th>
+                </tr>
+              </thead>
+              <tbody ng-repeat="rate in exchangeRate">
+                <tr>
+                  <td ng-bind="rate.bank"></td>
+                  <td ng-bind="rate.currency"></td>
+                  <td ng-bind="rate.code"></td>
+                  <td ng-bind="rate.currencyUnit"></td>
+                  <td ng-bind="rate.cenPrice"></td>
+                  <td ng-bind="rate.buyPrice1"></td>
+                  <td ng-bind="rate.sellPrice1"></td>
+                  <td ng-bind="rate.buyPrice2"></td>
+                  <td ng-bind="rate.sellPrice2"></td>
+                  <td ng-bind="rate.releasedate"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    </div>
+
+
+  </body>
+  <script>
+
+  </script>

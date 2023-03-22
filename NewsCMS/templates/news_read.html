@@ -1,0 +1,106 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>{{ news.title }}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'bootstrap.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+    <link href="blog.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="container">
+      <header class="blog-header py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+          <div class="col-4 pt-1">
+            <a class="text-muted" href="#">用户名</a>
+          </div>
+          <div class="col-4 text-center">
+{#            <a class="blog-header-logo text-dark" href="#">Large</a>#}
+          </div>
+          <div class="col-4 d-flex justify-content-end align-items-center">
+            <a class="text-muted" href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
+            </a>
+            <a class="btn btn-sm btn-outline-secondary" href="#">Sign out</a>
+          </div>
+        </div>
+      </header>
+
+
+
+      <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+        <div class="col-md-6 px-0">
+          <h1 class="display-4 font-italic">新闻阅读</h1>
+            <p class="lead mb-0"><span href="#" class="text-white font-weight-bold">NB的量化交易系统</span></p>
+        </div>
+      </div>
+
+
+
+
+    <main role="main" class="container">
+      <div class="row">
+{#        <div class="col-md-8 blog-main">#}
+        <div class="blog-main">
+
+
+          <div class="blog-post">
+            <h2 class="blog-post-title"> <span class="pb-3 mb-4 font-italic border-bottom" style="color: orange">
+            [{{ news.classify }} ]
+          </span>{{ news.title }}</h2>
+            <p class="blog-post-meta">{{ news.time }}</p>
+
+            <hr>
+            <p style="font-size: large;">
+                 {{ news.content }}
+              </p>
+
+               </div><!-- /.blog-post -->
+
+{#          <nav class="blog-pagination">#}
+{#            <a class="btn btn-outline-primary" href="#">Older</a>#}
+{#            <a class="btn btn-outline-secondary disabled" href="#">Newer</a>#}
+{#          </nav>#}
+
+        </div><!-- /.blog-main -->
+
+
+      </div><!-- /.row -->
+
+    </main><!-- /.container -->
+<hr>
+    <footer class="blog-footer">
+      <p>QuantSystem powered by <a href="#">@Jack</a> by <a href="#">@mdo</a>.</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../../../dist/js/bootstrap.min.js"></script>
+    <script src="../../../../assets/js/vendor/holder.min.js"></script>
+    <script>
+      Holder.addTheme('thumb', {
+        bg: '#55595c',
+        fg: '#eceeef',
+        text: 'Thumbnail'
+      });
+    </script>
+  </body>
+</html>

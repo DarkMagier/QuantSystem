@@ -1,0 +1,103 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+    <script src="{% static "angular.js" %}"></script>
+
+    <title>注册|NB的量化交易系统</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "signin.css" %}" rel="stylesheet">
+</head>
+
+<body class="text-center" ng-app="app" ng-controller="myCtrl">
+
+
+<form class="form-signin" method="post" ng-submit="signup()">
+    <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">欢迎注册</h1>
+    <div class="alert alert-warning" ng-init="alert=false" ng-show="alert==true" role="alert"
+         ng-bind="alertMessage"></div>
+    {% csrf_token %}
+    <label for="inputUsername" class="sr-only">用户名：</label>
+    <input type="text" id="inputUsername" name="user" class="form-control" placeholder="用户名" required autofocus>
+
+
+    <label for="inputNickname" class="sr-only">昵称：</label>
+    <input type="text" id="inputNickname" name="nikename" class="form-control" placeholder="昵称" required autofocus>
+
+
+    <label for="inputPassword" class="sr-only">密码：</label>
+    <input type="password" id="inputPassword" name="pwd" class="form-control" placeholder="密码" required>
+
+    <label for="inputEmail" class="sr-only">邮箱：</label>
+    <input type="text" id="inputEmail" name="email" class="form-control" placeholder="邮箱" required autofocus>
+
+    <label for="inputPhone" class="sr-only">手机：</label>
+    <input type="text" id="inputPhone" name="phone" class="form-control" placeholder="手机" required autofocus>
+    <div class="checkbox mb-3">
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+    <a href="/Registers/">已有账号，登录</a>
+    <br/>
+    <p class="mt-5 mb-3 text-muted">NB的量化交易系统 &copy; 2017-2018</p>
+</form>
+
+<script src="{% static "jquery.min.js" %}"></script>
+<script>
+    var app = angular.module('app', []);
+    app.config(function ($httpProvider) {
+        $httpProvider.defaults.headers.post = {'Content-Type': 'application/x-www-form-urlencoded'}
+    })
+    app.controller('myCtrl', function ($scope, $timeout) {
+        $scope.alert = false;
+        $scope.signup = function () {
+            $scope.alert = false;
+            var csrfmiddlewaretoken = jQuery("input[name='csrfmiddlewaretoken']").val();
+            var username = jQuery("#inputUsername").val();
+            var password = jQuery("#inputPassword").val();
+            var nickname = jQuery("#inputNickname").val();
+            var email = jQuery("#inputEmail").val();
+            var phone = jQuery("#inputPhone").val();
+            sendData = {
+                username: username,
+                password: password,
+                nickname: nickname,
+                email: email,
+                phone: phone,
+                csrfmiddlewaretoken: csrfmiddlewaretoken
+            }
+
+            jQuery.ajax(
+                {
+                    url: '/Registers/Signup',
+                    method: 'POST',
+                    data: sendData,
+                    success: function (data) {
+                        data = JSON.parse(data)
+                        console.log(data['status'])
+                        if (data['status'] == 200) {
+                            $scope.alert = true;
+                            $scope.alertMessage = "注册成功！请登陆！";
+                        } else {
+                            $scope.alert = true;
+                            $scope.alertMessage = data["msg"];
+                        }
+                        $scope.$apply();
+                    }
+                }
+            )
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+{#<div ng-controller="newsCtrl">#}
+    <div class="row" ng-init="getLastNews(newsPageIndex)">
+        <div class="col-md-8 blog-main col-md-offset-2">
+
+            <h3 class="pb-3 mb-4 font-italic border-bottom">
+                <div class="row">
+                    <div class="col-md-6">金融时讯</div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+{#                        <button type="button" class="btn btn-outline-warning">后台</button>#}
+
+                        <button type="button" class="btn btn-outline-success" ng-click="newsPageIndex=1;getLastNews(newsPageIndex)">刷新
+                        </button>
+                        <button type="button" class="btn btn-outline-success" ng-click="newsPageIndex=1;updateNews(newsPageIndex)">爬取
+                        </button>
+                    </div>
+                </div>
+            </h3>
+
+
+            <div class="blog-post" ng-repeat="news in lastNewsList">
+                    {% verbatim %}
+                    <h3 class="blog-post-title" >
+                        <a ng-init="news.url='/News/'+news.id+'.html'" ng-href="{{ news.url }}"target="view_window">
+                        <span ng-bind="'['+news.classify+']'"style="color:orange"></span>
+                        <span ng-bind="news.title"></span>
+                        </a>
+                    </h3>
+                <p><span class="blog-post-meta" ng-bind="news.time"></span></p>
+
+
+                <p ng-bind="news.content"></p>
+
+                <p><a ng-href="{{ news.url}}" target="view_window">阅读全文</a></p>
+                {% endverbatim %}
+            </div><!-- /.blog-post -->
+
+
+            <nav class="blog-pagination">
+                <a class="btn btn-outline-primary"ng-click="newsPageIndex=1;getLastNews(newsPageIndex)" href="#/News?page=First">Older</a>
+                <a class="btn btn-outline-primary"ng-class="{disabled:newsPageIndex==1}"ng-click="newsPageIndex=newsPageIndex-1;getLastNews(newsPageIndex)" href="#/News?page=older">Older</a>
+
+                <input id="newsPageIndex" type="number" class="btn btn-outline-secondary disabled" min="1"ng-init="1" ng-model="newsPageIndex"/>
+{#                <a class="btn btn-outline-primary "ng-class="{disabled:newsPageIndex==1}" ng-click="newsPageIndex=1" ng-href="#/News?page=1">1</a>#}
+{#                <a class="btn btn-outline-primary "ng-class="{disabled:newsPageIndex==2}" ng-click="newsPageIndex=2" ng-href="#/News?page=2">2</a>#}
+{#                <a class="btn btn-outline-primary "ng-class="{disabled:newsPageIndex==3}" ng-click="newsPageIndex=3" ng-href="#/News?page=3">3</a>#}
+{#                <a class="btn btn-outline-primary "ng-class="{disabled:newsPageIndex==4}" ng-click="newsPageIndex=4" ng-href="#/News?page=4">4</a>#}
+{#                <a class="btn btn-outline-primary "ng-class="{disabled:newsPageIndex==5}" ng-click="newsPageIndex=5" ng-href="#/News?page=5">5</a>#}
+
+
+                {#            <a class="btn btn-outline-secondary disabled" href="#">Newer</a>#}
+                <a class="btn btn-outline-primary" href="#/News?page=newer" ng-click="newsPageIndex=newsPageIndex+1;getLastNews(newsPageIndex)">Newer</a>
+                <a class="btn btn-outline-primary" href="#/News?page=newer" ng-click="getLastNews(-1)">Go To</a>
+{#                <a ng-bind="newsPageIndex"></a>#}
+            </nav>
+
+        </div><!-- /.blog-main -->
+
+        <aside class="col-md-4 blog-sidebar">
+{#  #}
+
+            <div class="p-3">
+                <h4 class="font-italic">友情链接</h4>
+                <ol class="list-unstyled mb-0">
+                    <li><a href="http://www.jackquantop.com">冰原狼de代码之路</a></li>
+                    <li><a href="http://www.cs.ecitic.com/newsite/">中信证券</a></li>
+                    <li><a href="http://www.newone.com.cn">招商证券</a></li>
+                    <li><a href="http://www.gtja.com">国泰君安</a></li>
+                    <li><a href="https://stock.pingan.com">平安证券</a></li>
+                </ol>
+            </div>
+
+            <div class="p-3">
+                <h4 class="font-italic">关注本站</h4>
+                <ol class="list-unstyled">
+                    <li><a href="#">新浪微博</a></li>
+                    <li><a href="#">微信公众号</a></li>
+                </ol>
+            </div>
+        </aside><!-- /.blog-sidebar -->
+
+    </div><!-- /.row -->
+{#    </div>#}
+
+ <script type="text/javascript">
+
+        alert("123");
+        {#    $scope.getLastNews= function getLastNews() {#}
+        {#    alert("123456");#}
+        {#    jQuery.ajax(#}
+        {#        {#}
+        {#            url: 'News/getLastNews',#}
+        {#            method: 'get',#}
+        {#            success: function (response) {#}
+        {#                console.log('test')#}
+        {#                $scope.lastNewsList = JSON.parse(response);#}
+        {#                $scope.$apply();#}
+        {#            }#}
+        {#        }#}
+        {#    )#}
+        {#}#}
+
+
+
+</script>
